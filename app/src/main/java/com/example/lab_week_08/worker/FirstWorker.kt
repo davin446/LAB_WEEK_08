@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.example.lab_week_08.utils.NotificationUtils
 
 class FirstWorker(
     context: Context,
@@ -13,8 +14,16 @@ class FirstWorker(
     override fun doWork(): Result {
         val id = inputData.getString(INPUT_DATA_ID)
 
-        // Simulasi pekerjaan 3 detik
+        // Simulasi pekerjaan
         Thread.sleep(3000L)
+
+        // Tampilkan notifikasi
+        NotificationUtils.showNotification(
+            applicationContext,
+            "First Worker Done",
+            "First worker completed its task!",
+            1
+        )
 
         val outputData = Data.Builder()
             .putString(OUTPUT_DATA_ID, id)
